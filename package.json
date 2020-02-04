@@ -1,0 +1,27 @@
+{
+  "name": "nextjs-pj1",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MASA-JAPAN/nextjs-pj1.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MASA-JAPAN/nextjs-pj1/issues"
+  },
+  "homepage": "https://github.com/MASA-JAPAN/nextjs-pj1#readme",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "next": "^9.2.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0"
+  }
+}
