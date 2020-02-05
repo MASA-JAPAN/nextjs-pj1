@@ -1,14 +1,22 @@
 import React, { Component } from "react";
 import axios from "axios";
 import MainLayout from "../components/layouts/mainLayout";
+import MyStyle from "../styles/main.css";
 
 class Home extends Component {
-  static getInitialProps() {
-    const request = axios
-      .get("https://jsonplaceholder.typicode.com/todos/1")
-      .then(response => {
-        console.log(response.data);
-      });
+  static async getInitialProps({ pathname, query, asPath, req, res }) {
+    let userData;
+
+    try {
+      const response = await axios.get(
+        "https://jsonplaceholder.typicode.com/todos/1"
+      );
+      userData = response.data;
+    } catch {
+      // console.log("error");
+    }
+
+    // console.log(req);
 
     return {
       user: {
@@ -21,16 +29,15 @@ class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      user: this.props.user
+      user: this.props.user,
+      userData: this.props.userData
     };
   }
   render() {
-    console.log(this.state);
-
     return (
       <>
         <MainLayout>
-          <h1>Hello</h1>
+          <h1 className={MyStyle.superAwesome}>Hello</h1>
         </MainLayout>
       </>
     );
