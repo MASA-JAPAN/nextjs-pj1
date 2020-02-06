@@ -1,17 +1,42 @@
 import React, { Component } from "react";
+import MainLayout from "../../components/layouts/mainLayout";
+import axios from "axios";
 
-const Profile = props => {
-  // console.log(props);
+class Profile extends Component {
+  static async getInitialProps({ query }) {
+    let user;
 
-  return (
-    <>
-      <h1>Profile</h1>
-    </>
+    try {
+      const response = await axios.get(
+        `https://jsonplaceholder.typicode.com/users/${query.userId}`
+      );
+      user = response.data;
+    } catch (error) {
+      console.log(error);
+    }
+
+    return { user };
+  }
+  showUser = user => (
+    <div>
+      <div>Name:{user.name}</div>
+      <div>Lastname:{user.phone}</div>
+      <div>Email:{user.email}</div>
+    </div>
   );
-};
 
-Profile.getInitialProps = async ({ pathname, query, asPath, req, res }) => {
-  return { values: "1,2,3,4" };
-};
+  render() {
+    // console.log(this.props);
+
+    return (
+      <MainLayout>
+        <br />
+        <h1>User Profile</h1>
+
+        {this.showUser(this.props.user)}
+      </MainLayout>
+    );
+  }
+}
 
 export default Profile;

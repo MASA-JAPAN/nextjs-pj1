@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import MainLayout from "../components/layouts/mainLayout";
 import MyStyle from "../styles/main.css";
+import Link from "next/link";
 
 class Home extends Component {
   static async getInitialProps({ pathname, query, asPath, req, res }) {
@@ -9,7 +10,7 @@ class Home extends Component {
 
     try {
       const response = await axios.get(
-        "https://jsonplaceholder.typicode.com/todos/1"
+        "https://jsonplaceholder.typicode.com/users"
       );
       userData = response.data;
     } catch {
@@ -22,22 +23,41 @@ class Home extends Component {
       user: {
         name: "Francis",
         lastname: "Jones"
-      }
+      },
+      userData
     };
   }
 
   constructor(props) {
     super(props);
-    this.state = {
-      user: this.props.user,
-      userData: this.props.userData
-    };
   }
+
+  renderUserList = users =>
+    users.map((user, i) => (
+      <li className="list-group-item" key={i}>
+        <Link
+          as={`/users/profile/${user.id}`}
+          href={{
+            pathname: "/users/profile",
+            query: {
+              userId: user.id
+            }
+          }}
+        >
+          <a>{user.name}</a>
+        </Link>
+      </li>
+    ));
   render() {
+    console.log(this.props);
+
     return (
       <>
         <MainLayout>
-          <h1 className={MyStyle.superAwesome}>Hello</h1>
+          <h1>Pick a user</h1>
+          <ul className="list-group">
+            {this.renderUserList(this.props.userData)}
+          </ul>
         </MainLayout>
       </>
     );

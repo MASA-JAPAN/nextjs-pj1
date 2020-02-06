@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "next",
+    "dev": "nodemon server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "NODE_ENV=production nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -21,6 +21,7 @@
   "dependencies": {
     "@zeit/next-css": "^1.0.1",
     "axios": "^0.19.2",
+    "express": "^4.17.1",
     "next": "^9.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
