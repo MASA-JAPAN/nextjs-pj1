@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import MainLayout from "../../components/layouts/mainLayout";
 import axios from "axios";
 
 class Profile extends Component {
@@ -12,7 +11,7 @@ class Profile extends Component {
       );
       user = response.data;
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
 
     return { user };
@@ -29,12 +28,12 @@ class Profile extends Component {
     // console.log(this.props);
 
     return (
-      <MainLayout>
+      <>
         <br />
         <h1>User Profile</h1>
 
         {this.showUser(this.props.user)}
-      </MainLayout>
+      </>
     );
   }
 }

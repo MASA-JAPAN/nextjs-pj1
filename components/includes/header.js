@@ -1,10 +1,11 @@
 import React from "react";
 import Link from "next/link";
+import auth0Serv from "../../lib/appAuth";
 
-const Header = () => {
+const Header = props => {
   return (
     <>
-      <header>
+      <header className={props.headerStyle}>
         <div className="container">
           <nav className="navbar navbar-expand-lg navbar-light">
             <Link href="/">
@@ -22,9 +23,27 @@ const Header = () => {
                 <Link href="/about">
                   <a className="nav-item nav-link">About us</a>
                 </Link>
-                <Link href="/users">
-                  <a className="nav-item nav-link">Users</a>
-                </Link>
+                {props.userAuth ? (
+                  <Link href="/users">
+                    <a className="nav-item nav-link">Users</a>
+                  </Link>
+                ) : null}
+
+                {props.userAuth ? (
+                  <span
+                    className="nav-item nav-link"
+                    onClick={() => auth0Serv.logout()}
+                  >
+                    Logout
+                  </span>
+                ) : (
+                  <span
+                    className="nav-item nav-link"
+                    onClick={() => auth0Serv.login()}
+                  >
+                    Login
+                  </span>
+                )}
               </div>
             </div>
           </nav>

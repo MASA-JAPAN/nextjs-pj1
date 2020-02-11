@@ -2,7 +2,7 @@ import React from "react";
 import { withRouter } from "next/router";
 
 const Message = props => {
-  console.log(props);
+  // console.log(props);
 
   const handler = () => {
     props.router.push(

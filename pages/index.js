@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import axios from "axios";
-import MainLayout from "../components/layouts/mainLayout";
 import MyStyle from "../styles/main.css";
 import Link from "next/link";
 
@@ -49,16 +48,14 @@ class Home extends Component {
       </li>
     ));
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <>
-        <MainLayout>
-          <h1>Pick a user</h1>
-          <ul className="list-group">
-            {this.renderUserList(this.props.userData)}
-          </ul>
-        </MainLayout>
+        <h1>Pick a user</h1>
+        <ul className="list-group">
+          {this.renderUserList(this.props.userData)}
+        </ul>
       </>
     );
   }

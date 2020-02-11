@@ -14,3 +14,7 @@ header .navbar-brand {
 header .navbar-nav .nav-item {
   color: #ffffff !important;
 }
+
+header.skyblue {
+  background: skyblue;
+}

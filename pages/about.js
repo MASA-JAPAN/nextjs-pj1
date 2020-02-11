@@ -1,9 +1,14 @@
 import React, { Component } from "react";
-import MainLayout from "../components/layouts/mainLayout";
 import Message from "../components/includes/message";
 import Router from "next/router";
 
 class About extends Component {
+  static getInitialProps() {
+    let headerStyle = "skyblue";
+
+    return { headerStyle };
+  }
+
   handleRouteStart = url => {
     console.log("App is changing to: ", url);
   };
@@ -30,21 +35,17 @@ class About extends Component {
     //   }
     //   return true;
     // });
-    Router.replace("/contact", "contact/56");
+    // Router.replace("/contact", "contact/56");
   }
   render() {
-    console.log(this.props);
-
     return (
       <>
-        <MainLayout>
-          <h1>About</h1>
-          <Message />
-          <br />
-          <span onClick={() => Router.push("/users/profile/1")}>
-            Click me now!!
-          </span>
-        </MainLayout>
+        <h1>About</h1>
+        <Message />
+        <br />
+        <span onClick={() => Router.push("/users/profile/1")}>
+          Click me now!!
+        </span>
       </>
     );
   }

@@ -6,7 +6,12 @@ const MainLayout = props => {
   return (
     <>
       <Head>
-        <title>My Awesome app</title>
+        {props.pageConfigs === "Admin" ? (
+          <title>User page admin</title>
+        ) : (
+          <title>My Awesome app</title>
+        )}
+
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
           rel="stylesheet"
@@ -20,7 +25,7 @@ const MainLayout = props => {
         <link href="/static/css/styles.css" rel="stylesheet" />
       </Head>
       <div className="mainLayout container">
-        <Header />
+        <Header {...props} />
         <div className="container">{props.children}</div>
       </div>
     </>
