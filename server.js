@@ -1,6 +1,8 @@
 const express = require("express");
 const next = require("next");
 const axios = require("axios");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
 
 const dev = process.env.NODE_ENV !== "production";
 const app = next({ dev });
@@ -9,10 +11,33 @@ const handle = app.getRequestHandler();
 const userJson = require("./user.json");
 const servAuth = require("./servAuth");
 
+const User = require("./models/users");
+
+mongoose
+  .connect(process.env.MONGO_SERV, { useNewUrlParser: true })
+  .then(() => {
+    console.log("connected");
+    console.log(process.env.MONGO_SERV);
+  })
+  .catch(err => console.log(err));
+
 app
   .prepare()
   .then(() => {
     const server = express();
+    server.use(bodyParser.json());
+
+    server.post("/api/v1/users", (req, res) => {
+      const userData = res.body;
+      const user = new User(userData);
+
+      user.save((err, user) => {
+        if (err) {
+          return res.status(422).send(err);
+        }
+        return res.json(user);
+      });
+    });
 
     server.get("/api/users", servAuth.authJWT, (req, res) => {
       // axios.get("https://jsonplaceholder.typicode.com/users").then(response => {
