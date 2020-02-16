@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon server.js",
+    "dev": "nodemon -w server.js server.js",
     "build": "next build",
-    "start": "NODE_ENV=production nodemon server.js"
+    "start": "NODE_ENV=production node server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "express-jwt": "^5.3.1",
+    "formik": "^2.1.4",
     "js-cookie": "^2.2.1",
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^1.6.2",

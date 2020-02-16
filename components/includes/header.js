@@ -23,6 +23,9 @@ const Header = props => {
                 <Link href="/about">
                   <a className="nav-item nav-link">About us</a>
                 </Link>
+                <Link href="/adduser">
+                  <a className="nav-item nav-link">Add user</a>
+                </Link>
                 {props.userAuth ? (
                   <Link href="/users">
                     <a className="nav-item nav-link">Users</a>

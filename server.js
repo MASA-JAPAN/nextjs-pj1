@@ -27,8 +27,62 @@ app
     const server = express();
     server.use(bodyParser.json());
 
+    server.get("/api/v1/usersall", (req, res) => {
+      User.find({}, (err, allUsers) => {
+        if (err) {
+          return res.status(422).send(err);
+        }
+        return res.json(allUsers);
+      });
+    });
+
+    server.get("/api/v1/users", (req, res) => {
+      User.find({ name: "Francis" }, (err, allUsers) => {
+        if (err) {
+          return res.status(422).send(err);
+        }
+        return res.json(allUsers);
+      });
+    });
+
+    server.patch("/api/v1/users/:id", (req, res) => {
+      let userId = req.params.id;
+      let userData = req.body;
+
+      User.findById(userId, (err, user) => {
+        if (err) {
+          return res.status(422).send(err);
+        }
+
+        user.set(userData);
+        user.save((err, modUser) => {
+          if (err) {
+            return res.status(422).send(err);
+          }
+          return res.json(modUser);
+        });
+      });
+    });
+
+    server.delete("/api/v1/users/:id", (req, res) => {
+      console.log("aa");
+
+      let userId = req.params.id;
+
+      User.deleteOne({ _id: userId }, (err, user) => {
+        let userId = req.params.id;
+
+        User.deleteOne({ _id: userId }, (err, user) => {
+          if (err) {
+            return res.status(422).send(err);
+          }
+          return res.json(user);
+        });
+      });
+    });
+
     server.post("/api/v1/users", (req, res) => {
-      const userData = res.body;
+      const userData = req.body;
       const user = new User(userData);
 
       user.save((err, user) => {
