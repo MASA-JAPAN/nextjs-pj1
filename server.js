@@ -21,11 +21,22 @@ mongoose
   })
   .catch(err => console.log(err));
 
+const robotsOptions = {
+  root: __dirname + "/static/",
+  header: {
+    "Content-Type": "text/plain;charset=UTF-8"
+  }
+};
+
 app
   .prepare()
   .then(() => {
     const server = express();
     server.use(bodyParser.json());
+
+    server.get("/robots.txt", (req, res) => {
+      return res.status(200).sendFile("robots.txt", robotsOptions);
+    });
 
     server.get("/api/v1/usersall", (req, res) => {
       User.find({}, (err, allUsers) => {
@@ -117,9 +128,11 @@ app
       }
     });
 
-    server.listen(3000, err => {
+    const PORT = process.env.PORT || 3000;
+
+    server.listen(PORT, err => {
       if (err) throw err;
-      console.log("> ready on port http://localhost:3000");
+      console.log(`> ready on port ${PORT}`);
     });
   })
   .catch(ex => {

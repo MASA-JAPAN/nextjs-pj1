@@ -11,6 +11,20 @@ const MainLayout = props => {
         ) : (
           <title>My Awesome app</title>
         )}
+        <meta
+          name="description"
+          content="Welcome to our super awesome application"
+        />
+        <meta name="keywords" content="awesome, next, react, app" />
+
+        <meta name="og:title" content="My awesome webpage" />
+        <meta name="og:locale" content="en_US" />
+        <meta name="og:url" content={`${props.baseUrl}`} />
+        <meta name="og:type" content="website" />
+        <meta
+          property="og:description"
+          content="Welcome to our super awesome application"
+        />
 
         <link
           href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
